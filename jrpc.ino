@@ -5,8 +5,8 @@
 
 #define uart Serial
 
-static char line_buffer[512];
-static const int json_buffer_size = 4096;
+static char line_buffer[128];
+static const int json_buffer_size = 512;
 static char json_buffer[json_buffer_size];
 
 char rx;
@@ -51,7 +51,11 @@ int analog_write(Argument *args, char *ret)
 }
 
 int tone_(Argument *args, char *ret) {
-  tone(args->pop_int(), args->pop_int(), args->pop_int());
+  int pin = args->pop_int();
+  int freq = args->pop_int();
+  int duration = args->pop_int();
+  
+  tone(pin, freq, duration);
 return success_no_data;
 }
 
@@ -126,7 +130,7 @@ int servo_detach(Argument *args, char *ret) {
   return success_no_data;
 }
 
-
+//TODO: Move to progmem
 command_t api_command_table[] = {
   {"pinMode", pin_mode },
   {"digitalWrite", digital_write},
@@ -149,7 +153,7 @@ command_t api_command_table[] = {
   {"servo_detach", servo_detach},
 };
 
-int api_num_commands;
+int api_num_commands = sizeof(api_command_table) / sizeof(api_command_table[0]);
     
 void setup()
 {

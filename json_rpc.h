@@ -26,7 +26,7 @@ public:
     void reset();
 
     int argc;
-    char argv[64][16];
+    char argv[16][16];
 
     int pop_int();
     unsigned int pop_uint();

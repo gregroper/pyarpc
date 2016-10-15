@@ -6,7 +6,7 @@
 #include <string.h>
 #include <assert.h>
 
-#define MAX_TOKENS 32
+#define MAX_TOKENS 16
 
 extern command_t api_command_table[];
 

@@ -68,6 +68,9 @@ def _recv_result(_sock):
     except Exception as e:
         print e, reply
         return {'result': 'error'}
+
+    if 'error' in json_reply:
+      raise Exception(json_reply['error'])
     return json_reply
 
 
